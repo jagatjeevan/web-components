@@ -31,12 +31,19 @@ class Button extends HTMLElement {
         this.$container = this.shadowRoot.querySelector('span');
     }
 
+    get label() {
+        return this.getAttribute('label');
+    }
+
+    get text() {
+        return this.getAttribute('text') || '';
+    }
+
     static get observedAttributes() {
         return ['label', 'text'];
     }
 
-    attributeChangedCallback(name, oldValue, newValue) {
-        this[name] = newValue;
+    attributeChangedCallback() {
         this.render();
     }
 
