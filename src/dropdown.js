@@ -17,7 +17,8 @@ template.innerHTML = `
     }
     </style>
     <div class="container">
-        <button>Label</button>
+        <button class="btn">Label</button>
+        <span></span>
     </div>
 `;
 
@@ -26,6 +27,22 @@ class Button extends HTMLElement {
         super();
         this._shadowRoot = this.attachShadow({ mode: 'open'});
         this._shadowRoot.appendChild(template.content.cloneNode(true));
+        this.$button = this.shadowRoot.querySelector('.btn');
+        this.$container = this.shadowRoot.querySelector('span');
+    }
+
+    static get observedAttributes() {
+        return ['label', 'text'];
+    }
+
+    attributeChangedCallback(name, oldValue, newValue) {
+        this[name] = newValue;
+        this.render();
+    }
+
+    render() {
+        this.$button.innerHTML = this.label;
+        this.$container.innerText = this.text;
     }
 }
 
