@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Web Components</title>
+    <script src="src/dropdown.js"></script>
+    <script src="src/anotherComponent.js"></script>
+    <style>
+        li {
+            margin-bottom: 10px;
+        }
+        code {
+            display: block;
+            background: #dfdfdf;
+            padding: 5px;
+            border: #cecece solid 1px;
+            border-radius: 3px;
+            margin: 3px 0;
+        }
+        pre {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <my-template></my-template>
+    
+    This is a simple web component. Inspect element for getting the shadow DOM
+    <my-button label="Button 1"></my-button>
+    <my-button label="Button 2"></my-button>
+    <my-button></my-button>
+
+    <p>To create a webcomponent</p>
+    <ul>
+        <li>
+            Create a template.
+            <code>const template = document.createTemplate('template');</code>
+        </li>
+        <li>
+            Create the structure of the component.
+            <code>
+                template.innerHTML = `...Here goes the style and HTML of the template`;
+            </code>
+        </li>
+        <li>
+            Create a class extending HTMLElement.
+            <code>
+                <pre>
+class MyComponent extends HTMLElement {
+    constructor() {
+        super();
+        this._shadowRoot = this.attachShadow({mode: true});
+        this._shadowRoot.appendChild(template.content.cloneNode(true));
+    }
+}
+</pre>
+            </code>
+        </li>
+        <li>
+            Then you export the class so that you can use it as HTML tags. <br />
+            <code>
+                    window.customElements.define('my-component', MyComponent);
+            </code>
+        </li>
+        <li>
+            You use the component created as 
+            <code>
+                &lt;my-component />
+            </code>
+        </li>
+    </ul>
+</body>
+</html>

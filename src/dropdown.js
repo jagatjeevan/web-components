@@ -18,7 +18,6 @@ template.innerHTML = `
     </style>
     <div class="container">
         <button class="btn">Label</button>
-        <span></span>
     </div>
 `;
 
@@ -35,12 +34,12 @@ class Button extends HTMLElement {
         return this.getAttribute('label');
     }
 
-    get text() {
-        return this.getAttribute('text') || '';
+    set label(value) {
+        this.setAttribute('label',value);
     }
 
     static get observedAttributes() {
-        return ['label', 'text'];
+        return ['label'];
     }
 
     attributeChangedCallback() {
@@ -49,7 +48,6 @@ class Button extends HTMLElement {
 
     render() {
         this.$button.innerHTML = this.label;
-        this.$container.innerText = this.text;
     }
 }
 
