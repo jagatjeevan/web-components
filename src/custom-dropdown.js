@@ -34,7 +34,11 @@ class DropDown extends HTMLElement {
         this.$label = this.shadowRoot.querySelector('label');
         this.$dropDownControl = this.shadowRoot.querySelector('.drop-down-control');
         this.$dropDownControl.addEventListener('click', function() {
-            this.onClick('jakljsdfkj');
+            this.dispatchEvent(
+                new CustomEvent('onClick', {
+                    detail: 'This is from HTML element',
+                })
+            );
         });
     }
 

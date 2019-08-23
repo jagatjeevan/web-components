@@ -15,7 +15,7 @@
       <drop-down label="Jagat"></drop-down>
     </div>
     <script>
-      document.querySelector('drop-down').onClick = function(value){console.log(value);}
+      document.querySelector('drop-down').addEventListener('onClick', e => console.log(e));
     </script>
   </body>
 </html>
